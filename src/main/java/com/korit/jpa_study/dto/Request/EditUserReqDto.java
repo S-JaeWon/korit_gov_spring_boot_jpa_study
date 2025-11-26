@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class EditUserReqDto {
     private Integer userId;
-    private String username;
     private String password;
+    private String email;
 }

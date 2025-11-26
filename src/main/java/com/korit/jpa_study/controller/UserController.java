@@ -1,6 +1,6 @@
 package com.korit.jpa_study.controller;
 
-import com.korit.jpa_study.dto.Request.AddUserReqDto;
+import com.korit.jpa_study.dto.Request.SignupReqDto;
 import com.korit.jpa_study.dto.Request.EditUserReqDto;
 import com.korit.jpa_study.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUser(@RequestBody AddUserReqDto addUserReqDto) {
-        return ResponseEntity.ok(userService.add(addUserReqDto));
+    public ResponseEntity<?> addUser(@RequestBody SignupReqDto signupReqDto) {
+        return ResponseEntity.ok(userService.add(signupReqDto));
     }
 
     @GetMapping("/all")

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class AddUserReqDto {
+public class SignupReqDto {
     private String username;
     private String password;
     private String email;

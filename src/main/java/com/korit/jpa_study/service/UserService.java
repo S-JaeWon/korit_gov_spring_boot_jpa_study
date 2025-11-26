@@ -1,6 +1,6 @@
 package com.korit.jpa_study.service;
 
-import com.korit.jpa_study.dto.Request.AddUserReqDto;
+import com.korit.jpa_study.dto.Request.SignupReqDto;
 import com.korit.jpa_study.dto.Request.EditUserReqDto;
 import com.korit.jpa_study.dto.Response.ApiRespDto;
 import com.korit.jpa_study.entity.User;
@@ -16,12 +16,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public ApiRespDto<?> add(AddUserReqDto addUserReqDto) {
-        Optional<User> foundUser = userRepository.findByUsername(addUserReqDto.getUsername());
+    public ApiRespDto<?> add(SignupReqDto signupReqDto) {
+        Optional<User> foundUser = userRepository.findByUsername(signupReqDto.getUsername());
         if (foundUser.isPresent()) {
             return new ApiRespDto<>("failed", "중복된 username", "null");
         }
-        return new ApiRespDto<>("success", "추가완료", userRepository.save(addUserReqDto.toEntity()));
+        return new ApiRespDto<>("success", "추가완료", userRepository.save(signupReqDto.toEntity()));
     }
 
     public ApiRespDto<?> getUserAll() {
@@ -33,7 +33,7 @@ public class UserService {
         if (foundUser.isEmpty()) {
             return new ApiRespDto<>("failed", "존재하지 않는 user", "null");
         }
-        return new ApiRespDto<>("success", "user 조회 완료", userRepository.findByUserId(userId));
+        return new ApiRespDto<>("success", "user 조회 완료", foundUser);
     }
 
     public ApiRespDto<?> getUserByUsername(String username) {
@@ -51,8 +51,8 @@ public class UserService {
         }
 
         User user = foundUser.get();
-        if (editUserReqDto.getUsername() != null) { // username이 null이 아닐 때만 변경
-            user.setUsername(editUserReqDto.getUsername());
+        if (editUserReqDto.getEmail() != null) { // username이 null이 아닐 때만 변경
+            user.setUsername(editUserReqDto.getEmail());
         }
         if (editUserReqDto.getPassword() != null) { // password가 null이 아닐 때만 변경
             user.setPassword(editUserReqDto.getPassword());
